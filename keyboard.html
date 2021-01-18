@@ -6,7 +6,7 @@
 </head>
 
 <script>
-    const add_umlaut = (word) =>
+    const add_umlauts = (word) =>
         word.replace(/a/g, "ä")
             .replace(/e/g, "ë")
             .replace(/u/g, "ü")
@@ -16,7 +16,7 @@
             .replace(/U/g, "Ü")
             .replace(/O/g, "Ö")
         ;
-    const remove_umlaut = (word) =>
+    const remove_umlauts = (word) =>
         word.replace(/ä/g, "a")
             .replace(/ë/g, "e")
             .replace(/ü/g, "u")
@@ -37,19 +37,19 @@
                 if (word.match(/\//)) { return word; }
                 if (word.match(/-.+#/)) {
                     const suffix = word.replace(/#/, "").trim();
-                    word = `${remove_umlaut(suffix)}/${add_umlaut(suffix)}`
+                    word = `${remove_umlauts(suffix)}/${add_umlauts(suffix)}`
                 } else if (word.match(/c/)) {
-                    word = word.match(/[äëüöÄËÜÖ]/) ? remove_umlaut(word) :
-                        word.match(/[aeuoAEUO]/) ? add_umlaut(word) : word;
+                    word = word.match(/[äëüöÄËÜÖ]/) ? remove_umlauts(word) :
+                        word.match(/[aeuoAEUO]/) ? add_umlauts(word) : word;
 
                     word = word.replace(/c/g, "");
                 } else if (word.match(/x/)) {
-                    word = remove_umlaut(word);
+                    word = remove_umlauts(word);
                     if (word.match(/[aeuoAEUO]/)) {
                         word = word.replace(/x/g, "");
                     }
                 } else if (word.match(/[äëüöÄËÜÖ]/) || word.match(/[;æÆ]/)) {
-                    word = add_umlaut(word);
+                    word = add_umlauts(word);
                     if (word.match(/[äëüöÄËÜÖ]/)) {
                         word = word.replace(/[;æÆ]/g, "");
                     }
