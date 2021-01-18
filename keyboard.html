@@ -29,17 +29,8 @@
         text = text.replace(/'/g, "ˈ");
         text = text.replace(/tq/g, "þ");
         text = text.replace(/dq/g, "ð");
-        text = text.replace(/[æÆ]a/g, "ä");
-        text = text.replace(/[æÆ]e/g, "ë");
-        text = text.replace(/[æÆ]u/g, "ü");
-        text = text.replace(/[æÆ]o/g, "ö");
-
         text = text.replace(/Tq/g, "Þ");
         text = text.replace(/Dq/g, "Ð");
-        text = text.replace(/[æÆ]A/g, "Ä");
-        text = text.replace(/[æÆ]E/g, "Ë");
-        text = text.replace(/[æÆ]U/g, "Ü");
-        text = text.replace(/[æÆ]O/g, "Ö");
 
         return text.split("\n").map((text) =>
             text.split(" ").map((word) => {
