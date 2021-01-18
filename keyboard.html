@@ -32,8 +32,8 @@
         text = text.replace(/Tq/g, "Þ");
         text = text.replace(/Dq/g, "Ð");
 
-        return text.split("\n").map((text) =>
-            text.split(" ").map((word) => {
+        return text.split("\n").map((line) =>
+            line.split(" ").map((word) => {
                 if (word.match(/\//)) { return word; }
                 if (word.match(/-.+#/)) {
                     const suffix = word.replace(/#/, "").trim();
