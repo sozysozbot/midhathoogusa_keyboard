@@ -26,6 +26,7 @@
             .replace(/Ü/g, "U")
             .replace(/Ö/g, "O");
     const foo = (text) => {
+        text = text.replace(/'/g, "ˈ");
         text = text.replace(/tq/g, "þ");
         text = text.replace(/dq/g, "ð");
         text = text.replace(/[æÆ]a/g, "ä");
