@@ -25,7 +25,7 @@
             .replace(/Ë/g, "E")
             .replace(/Ü/g, "U")
             .replace(/Ö/g, "O");
-    const foo = (text) => {
+    const main = (text) => {
         text = text.replace(/'/g, "ˈ");
         text = text.replace(/tq/g, "þ");
         text = text.replace(/dq/g, "ð");
@@ -60,8 +60,8 @@
     }
 </script>
 <h2><a href="http://ziphil.com/other/other/14.html">ミザソーグ語</a>入力支援</h2>
-<textarea spellcheck="false" id="foo"
-    onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10"
+<textarea spellcheck="false" id="main"
+    onkeyup="document.getElementById('main').value = main(document.getElementById('main').value)" rows="10"
     cols="40"></textarea>
 <br>
 ウムラウトは、語頭・語中・語末のどこかにセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。単語内に i 以外の母音が見え次第セミコロンは自分で消えてくれる。
