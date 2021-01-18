@@ -33,10 +33,11 @@
         text = text.replace(/[æÆ]O/g, "Ö");
 
         text = text.split(" ").map((word) => {
-            if (word.match(/-.+#/) && !word.match(/\//)) {
+            if (word.match(/\//)) { return word; }
+
+            if (word.match(/-.+#/)) {
                 const suffix = word.replace(/#/, "").trim();
-                word = `${suffix}/${
-                    suffix
+                word = `${suffix}/${suffix
                     .replace(/a/g, "ä")
                     .replace(/e/g, "ë")
                     .replace(/u/g, "ü")
@@ -45,9 +46,21 @@
                     .replace(/E/g, "Ë")
                     .replace(/U/g, "Ü")
                     .replace(/O/g, "Ö")}`
+            } else if (word.match(/x/)) {
+                word = word.replace(/ä/g, "a");
+                word = word.replace(/ë/g, "e");
+                word = word.replace(/ü/g, "u");
+                word = word.replace(/ö/g, "o");
+                word = word.replace(/Ä/g, "A");
+                word = word.replace(/Ë/g, "E");
+                word = word.replace(/Ü/g, "U");
+                word = word.replace(/Ö/g, "O");
+                if (word.match(/[aeuuAEUO]/)) {
+                    word = word.replace(/x/g, "");
+                }
             } else if (
-                (word.match(/[äëüöÄËÜÖ]/) && !word.match(/\//))
-            ||  (word.match(/[;æÆ]/) && !word.match(/\//))
+                word.match(/[äëüöÄËÜÖ]/)
+                || word.match(/[;æÆ]/)
             ) {
                 word = word.replace(/a/g, "ä");
                 word = word.replace(/e/g, "ë");
@@ -73,6 +86,7 @@
 <br>
 ウムラウトは、語頭・語中・語末のどこかにセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。単語内に i 以外の母音が見え次第セミコロンは自分で消えてくれる。
 <br>
+間違えてウムラウトを付けてしまったときは、 x を押すとウムラウトが吹き飛ぶ。<br>
 tq や dq と打つと þ と ð。
 <br>アイスランドキーボードを使っている場合、; の代わりに æ を打ってもよい。<br>
 Äðüsöölü koohu sööläðävä. と打つには、Adquso;olu koohu ;sooladqava. とか æAðusoolu koohu soolaæðava. と打てば良い。<br>
