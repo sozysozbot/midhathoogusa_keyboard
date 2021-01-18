@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<script>
+    const foo = (text) => {
+        text = text.replace(/a;/g, "ä");
+        text = text.replace(/e;/g, "ë");
+        text = text.replace(/u;/g, "ü");
+        text = text.replace(/o;/g, "ö");
+        text = text.replace(/t;/g, "þ");
+        text = text.replace(/d;/g, "ð");
+
+        text = text.replace(/A;/g, "Ä");
+        text = text.replace(/E;/g, "Ë");
+        text = text.replace(/U;/g, "Ü");
+        text = text.replace(/O;/g, "Ö");
+        text = text.replace(/T;/g, "Þ");
+        text = text.replace(/D;/g, "Ð");
+
+        text = text.split(" ").map((word) => {
+            if (word.match(/[äëüöÄËÜÖ]/)) {
+                word = word.replace(/a/g, "ä");
+                word = word.replace(/e/g, "ë");
+                word = word.replace(/u/g, "ü");
+                word = word.replace(/o/g, "ö");
+                word = word.replace(/A/g, "Ä");
+                word = word.replace(/E/g, "Ë");
+                word = word.replace(/U/g, "Ü");
+                word = word.replace(/O/g, "Ö");
+            }
+            return word;
+        }).join(" ");
+        return text
+    }
+</script>
+<textarea id="foo" onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10" cols="40">
+
+</textarea>
+<br>
+ウムラウトは、語の最初の母音の後にセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。
+<br>
+t; や d; と打つと þ と ð。
+<br>
+Äðüsöölü koohu sööläðävä. と打つには、 A;d;usoolu koohu so;olad;ava と打てば良い。
