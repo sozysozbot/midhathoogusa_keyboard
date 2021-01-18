@@ -17,7 +17,19 @@
         text = text.replace(/D;/g, "Ð");
 
         text = text.split(" ").map((word) => {
-            if (word.match(/[äëüöÄËÜÖ]/)) {
+            if (word.match(/-.+#/) && !word.match(/\//)) {
+                const suffix = word.replace(/#/, "").trim();
+                word = `${suffix}/${
+                    suffix
+                    .replace(/a/g, "ä")
+                    .replace(/e/g, "ë")
+                    .replace(/u/g, "ü")
+                    .replace(/o/g, "ö")
+                    .replace(/A/g, "Ä")
+                    .replace(/E/g, "Ë")
+                    .replace(/U/g, "Ü")
+                    .replace(/O/g, "Ö")}`
+            } else if (word.match(/[äëüöÄËÜÖ]/) && !word.match(/\//)) {
                 word = word.replace(/a/g, "ä");
                 word = word.replace(/e/g, "ë");
                 word = word.replace(/u/g, "ü");
@@ -32,7 +44,8 @@
         return text
     }
 </script>
-<textarea id="foo" onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10" cols="40">
+<textarea id="foo" onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10"
+    cols="40">
 
 </textarea>
 <br>
@@ -40,4 +53,5 @@
 <br>
 t; や d; と打つと þ と ð。
 <br>
-Äðüsöölü koohu sööläðävä. と打つには、 A;d;usoolu koohu so;olad;ava. と打てば良い。
+Äðüsöölü koohu sööläðävä. と打つには、 A;d;usoolu koohu so;olad;ava. と打てば良い。<br>
+あと、-で始まり#で終わるやつは特殊扱いされ、-eiumome# と打つと -eiumome/-ëiümömë に展開される。
