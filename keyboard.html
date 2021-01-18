@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<meta charset="UTF-8">
+
+<head>
+    <meta charset="UTF-8">
+    <title>ミザソーグ語入力支援</title>
+</head>
+
 <script>
     const foo = (text) => {
         text = text.replace(/;a/g, "ä");
@@ -79,10 +84,9 @@
         return text
     }
 </script>
-<textarea spellcheck="false" id="foo" onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10"
-    cols="40">
-
-</textarea>
+<h2><a href="http://ziphil.com/other/other/14.html">ミザソーグ語</a>入力支援</h2>
+<textarea spellcheck="false" id="foo"
+    onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10" cols="40"></textarea>
 <br>
 ウムラウトは、語頭・語中・語末のどこかにセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。単語内に i 以外の母音が見え次第セミコロンは自分で消えてくれる。
 <br>
