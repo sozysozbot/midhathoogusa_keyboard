@@ -55,7 +55,7 @@
                 word = word.replace(/Ë/g, "E");
                 word = word.replace(/Ü/g, "U");
                 word = word.replace(/Ö/g, "O");
-                if (word.match(/[aeuuAEUO]/)) {
+                if (word.match(/[aeuoAEUO]/)) {
                     word = word.replace(/x/g, "");
                 }
             } else if (
@@ -86,7 +86,7 @@
 <br>
 ウムラウトは、語頭・語中・語末のどこかにセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。単語内に i 以外の母音が見え次第セミコロンは自分で消えてくれる。
 <br>
-間違えてウムラウトを付けてしまったときは、 x を押すとウムラウトが吹き飛ぶ。<br>
+間違えてウムラウトを付けてしまったときは、 x を押すとウムラウトが吹き飛ぶ（2021/01/19 0:41, oのときにこれが起きないバグを修正）。<br>
 tq や dq と打つと þ と ð。
 <br>アイスランドキーボードを使っている場合、; の代わりに æ を打ってもよい。<br>
 Äðüsöölü koohu sööläðävä. と打つには、Adquso;olu koohu ;sooladqava. とか æAðusoolu koohu soolaæðava. と打てば良い。<br>
