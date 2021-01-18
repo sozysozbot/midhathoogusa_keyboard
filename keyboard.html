@@ -40,30 +40,31 @@
         text = text.replace(/[æÆ]U/g, "Ü");
         text = text.replace(/[æÆ]O/g, "Ö");
 
-        text = text.split(" ").map((word) => {
-            if (word.match(/\//)) { return word; }
-            if (word.match(/-.+#/)) {
-                const suffix = word.replace(/#/, "").trim();
-                word = `${remove_umlaut(suffix)}/${add_umlaut(suffix)}`
-            } else if (word.match(/c/)) {
-                word = word.match(/[äëüöÄËÜÖ]/) ? remove_umlaut(word) :
-                    word.match(/[aeuoAEUO]/) ? add_umlaut(word) : word;
+        return text.split("\n").map((text) =>
+            text.split(" ").map((word) => {
+                if (word.match(/\//)) { return word; }
+                if (word.match(/-.+#/)) {
+                    const suffix = word.replace(/#/, "").trim();
+                    word = `${remove_umlaut(suffix)}/${add_umlaut(suffix)}`
+                } else if (word.match(/c/)) {
+                    word = word.match(/[äëüöÄËÜÖ]/) ? remove_umlaut(word) :
+                        word.match(/[aeuoAEUO]/) ? add_umlaut(word) : word;
 
-                word = word.replace(/c/g, "");
-            } else if (word.match(/x/)) {
-                word = remove_umlaut(word);
-                if (word.match(/[aeuoAEUO]/)) {
-                    word = word.replace(/x/g, "");
+                    word = word.replace(/c/g, "");
+                } else if (word.match(/x/)) {
+                    word = remove_umlaut(word);
+                    if (word.match(/[aeuoAEUO]/)) {
+                        word = word.replace(/x/g, "");
+                    }
+                } else if (word.match(/[äëüöÄËÜÖ]/) || word.match(/[;æÆ]/)) {
+                    word = add_umlaut(word);
+                    if (word.match(/[äëüöÄËÜÖ]/)) {
+                        word = word.replace(/[;æÆ]/g, "");
+                    }
                 }
-            } else if (word.match(/[äëüöÄËÜÖ]/) || word.match(/[;æÆ]/)) {
-                word = add_umlaut(word);
-                if (word.match(/[äëüöÄËÜÖ]/)) {
-                    word = word.replace(/[;æÆ]/g, "");
-                }
-            }
-            return word;
-        }).join(" ");
-        return text
+                return word;
+            }).join(" ")
+        ).join("\n")
     }
 </script>
 <h2><a href="http://ziphil.com/other/other/14.html">ミザソーグ語</a>入力支援</h2>
@@ -80,4 +81,5 @@ tq や dq と打つと þ と ð。
 Äðüsöölü koohu sööläðävä. と打つには、Adquso;olu koohu ;sooladqava. とか æAðusoolu koohu soolaæðava. と打てば良い。<br>
 あと、-で始まり#で終わるやつは特殊扱いされ、-eiumome# や -ëiümömë# と打つと -eiumome/-ëiümömë に展開される。
 <br><br>
-2021/01/19 0:45 スペルチェックを切る属性を書いた
+2021/01/19 0:45 スペルチェックを切る属性を書いた<br>
+2021/01/19 1:19 改行をまたいでウムラウトが伝播するバグを修正
