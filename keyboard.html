@@ -79,7 +79,7 @@
         return text
     }
 </script>
-<textarea id="foo" onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10"
+<textarea spellcheck="false" id="foo" onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10"
     cols="40">
 
 </textarea>
@@ -91,3 +91,5 @@ tq や dq と打つと þ と ð。
 <br>アイスランドキーボードを使っている場合、; の代わりに æ を打ってもよい。<br>
 Äðüsöölü koohu sööläðävä. と打つには、Adquso;olu koohu ;sooladqava. とか æAðusoolu koohu soolaæðava. と打てば良い。<br>
 あと、-で始まり#で終わるやつは特殊扱いされ、-eiumome# と打つと -eiumome/-ëiümömë に展開される。
+<br><br>
+2021/01/19 0:45 スペルチェックを切る属性を書いた
