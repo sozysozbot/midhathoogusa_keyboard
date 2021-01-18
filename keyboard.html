@@ -6,15 +6,26 @@
 </head>
 
 <script>
+    const add_umlaut = (word) =>
+        word.replace(/a/g, "ä")
+            .replace(/e/g, "ë")
+            .replace(/u/g, "ü")
+            .replace(/o/g, "ö")
+            .replace(/A/g, "Ä")
+            .replace(/E/g, "Ë")
+            .replace(/U/g, "Ü")
+            .replace(/O/g, "Ö")
+        ;
+    const remove_umlaut = (word) =>
+        word.replace(/ä/g, "a")
+            .replace(/ë/g, "e")
+            .replace(/ü/g, "u")
+            .replace(/ö/g, "o")
+            .replace(/Ä/g, "A")
+            .replace(/Ë/g, "E")
+            .replace(/Ü/g, "U")
+            .replace(/Ö/g, "O");
     const foo = (text) => {
-        text = text.replace(/;a/g, "ä");
-        text = text.replace(/;e/g, "ë");
-        text = text.replace(/;u/g, "ü");
-        text = text.replace(/;o/g, "ö");
-        text = text.replace(/a;/g, "ä");
-        text = text.replace(/e;/g, "ë");
-        text = text.replace(/u;/g, "ü");
-        text = text.replace(/o;/g, "ö");
         text = text.replace(/tq/g, "þ");
         text = text.replace(/dq/g, "ð");
         text = text.replace(/[æÆ]a/g, "ä");
@@ -22,14 +33,6 @@
         text = text.replace(/[æÆ]u/g, "ü");
         text = text.replace(/[æÆ]o/g, "ö");
 
-        text = text.replace(/;A/g, "Ä");
-        text = text.replace(/;E/g, "Ë");
-        text = text.replace(/;U/g, "Ü");
-        text = text.replace(/;O/g, "Ö");
-        text = text.replace(/A;/g, "Ä");
-        text = text.replace(/E;/g, "Ë");
-        text = text.replace(/U;/g, "Ü");
-        text = text.replace(/O;/g, "Ö");
         text = text.replace(/Tq/g, "Þ");
         text = text.replace(/Dq/g, "Ð");
         text = text.replace(/[æÆ]A/g, "Ä");
@@ -39,42 +42,21 @@
 
         text = text.split(" ").map((word) => {
             if (word.match(/\//)) { return word; }
-
             if (word.match(/-.+#/)) {
                 const suffix = word.replace(/#/, "").trim();
-                word = `${suffix}/${suffix
-                    .replace(/a/g, "ä")
-                    .replace(/e/g, "ë")
-                    .replace(/u/g, "ü")
-                    .replace(/o/g, "ö")
-                    .replace(/A/g, "Ä")
-                    .replace(/E/g, "Ë")
-                    .replace(/U/g, "Ü")
-                    .replace(/O/g, "Ö")}`
+                word = `${suffix}/${add_umlaut(suffix)}`
+            } else if (word.match(/c/)) {
+                word = word.match(/[äëüöÄËÜÖ]/) ? remove_umlaut(word) :
+                    word.match(/[aeuoAEUO]/) ? add_umlaut(word) : word;
+
+                word = word.replace(/c/g, "");
             } else if (word.match(/x/)) {
-                word = word.replace(/ä/g, "a");
-                word = word.replace(/ë/g, "e");
-                word = word.replace(/ü/g, "u");
-                word = word.replace(/ö/g, "o");
-                word = word.replace(/Ä/g, "A");
-                word = word.replace(/Ë/g, "E");
-                word = word.replace(/Ü/g, "U");
-                word = word.replace(/Ö/g, "O");
+                word = remove_umlaut(word);
                 if (word.match(/[aeuoAEUO]/)) {
                     word = word.replace(/x/g, "");
                 }
-            } else if (
-                word.match(/[äëüöÄËÜÖ]/)
-                || word.match(/[;æÆ]/)
-            ) {
-                word = word.replace(/a/g, "ä");
-                word = word.replace(/e/g, "ë");
-                word = word.replace(/u/g, "ü");
-                word = word.replace(/o/g, "ö");
-                word = word.replace(/A/g, "Ä");
-                word = word.replace(/E/g, "Ë");
-                word = word.replace(/U/g, "Ü");
-                word = word.replace(/O/g, "Ö");
+            } else if (word.match(/[äëüöÄËÜÖ]/) || word.match(/[;æÆ]/)) {
+                word = add_umlaut(word);
                 if (word.match(/[äëüöÄËÜÖ]/)) {
                     word = word.replace(/[;æÆ]/g, "");
                 }
@@ -86,11 +68,13 @@
 </script>
 <h2><a href="http://ziphil.com/other/other/14.html">ミザソーグ語</a>入力支援</h2>
 <textarea spellcheck="false" id="foo"
-    onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10" cols="40"></textarea>
+    onkeyup="document.getElementById('foo').value = foo(document.getElementById('foo').value)" rows="10"
+    cols="40"></textarea>
 <br>
 ウムラウトは、語頭・語中・語末のどこかにセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。単語内に i 以外の母音が見え次第セミコロンは自分で消えてくれる。
 <br>
 間違えてウムラウトを付けてしまったときは、 x を押すとウムラウトが吹き飛ぶ（2021/01/19 0:41, oのときにこれが起きないバグを修正）。<br>
+ちなみに c を打つとウムラウトのオンオフを切り替えることができる。これだけあれば良かったのでは。まあいいや。<br>
 tq や dq と打つと þ と ð。
 <br>アイスランドキーボードを使っている場合、; の代わりに æ を打ってもよい。<br>
 Äðüsöölü koohu sööläðävä. と打つには、Adquso;olu koohu ;sooladqava. とか æAðusoolu koohu soolaæðava. と打てば良い。<br>
