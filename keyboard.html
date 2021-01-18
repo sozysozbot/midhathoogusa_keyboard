@@ -2,19 +2,27 @@
 <meta charset="UTF-8">
 <script>
     const foo = (text) => {
-        text = text.replace(/a;/g, "ä");
-        text = text.replace(/e;/g, "ë");
-        text = text.replace(/u;/g, "ü");
-        text = text.replace(/o;/g, "ö");
-        text = text.replace(/t;/g, "þ");
-        text = text.replace(/d;/g, "ð");
+        text = text.replace(/;a/g, "ä");
+        text = text.replace(/;e/g, "ë");
+        text = text.replace(/;u/g, "ü");
+        text = text.replace(/;o/g, "ö");
+        text = text.replace(/;t/g, "þ");
+        text = text.replace(/;d/g, "ð");
+        text = text.replace(/æa/g, "ä");
+        text = text.replace(/æe/g, "ë");
+        text = text.replace(/æu/g, "ü");
+        text = text.replace(/æo/g, "ö");
 
-        text = text.replace(/A;/g, "Ä");
-        text = text.replace(/E;/g, "Ë");
-        text = text.replace(/U;/g, "Ü");
-        text = text.replace(/O;/g, "Ö");
-        text = text.replace(/T;/g, "Þ");
-        text = text.replace(/D;/g, "Ð");
+        text = text.replace(/;A/g, "Ä");
+        text = text.replace(/;E/g, "Ë");
+        text = text.replace(/;U/g, "Ü");
+        text = text.replace(/;O/g, "Ö");
+        text = text.replace(/;T/g, "Þ");
+        text = text.replace(/;D/g, "Ð");
+        text = text.replace(/æA/g, "Ä");
+        text = text.replace(/æE/g, "Ë");
+        text = text.replace(/æU/g, "Ü");
+        text = text.replace(/æO/g, "Ö");
 
         text = text.split(" ").map((word) => {
             if (word.match(/-.+#/) && !word.match(/\//)) {
@@ -49,9 +57,9 @@
 
 </textarea>
 <br>
-ウムラウトは、語の最初の母音の後にセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。
+ウムラウトは、語の最初の母音の前にセミコロン（;）を打つ。そうすると残りは勝手に母音調和する。
 <br>
-t; や d; と打つと þ と ð。
-<br>
-Äðüsöölü koohu sööläðävä. と打つには、 A;d;usoolu koohu so;olad;ava. と打てば良い。<br>
+;t や ;d と打つと þ と ð。
+<br>; の代わりに æ を打ってもよい。<br>
+Äðüsöölü koohu sööläðävä. と打つには、 ;A;dusoolu koohu s;oola;dava. と打てば良い。<br>
 あと、-で始まり#で終わるやつは特殊扱いされ、-eiumome# と打つと -eiumome/-ëiümömë に展開される。
